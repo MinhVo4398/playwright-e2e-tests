@@ -12,6 +12,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "login":"npx playwright test tests/functional/login.spec.ts --headed",
     "demo":"npx playwright test tests/demo/mytest.spec.ts --headed"
   },
   "devDependencies": {
