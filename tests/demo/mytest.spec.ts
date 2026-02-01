@@ -9,7 +9,17 @@ test("Should load home page with correct title", async ({ page }) => {
   await expect(page.locator("//h1")).toHaveText("CURA Healthcare Service");
 });
 
-test('Should do something', {tag: '@smoke'}, async ({page}, testInfo) => {
-    // step...
-    await page.locator('//h1').click();
-})
+test("Should do something", { tag: "@smoke" }, async ({ page }, testInfo) => {
+  // step...
+  await page.locator("//h1").click();
+}); 
+
+test.only("Should demo locators", async ({ page }) => {
+  await page.goto("https://katalon-demo-cura.herokuapp.com/");
+
+  // 2. Click on the Make Appointment
+  let makeAppmBtn =  page.getByRole("link", { name: "Make Appointment" });
+  await makeAppmBtn.click();
+  await expect(page.getByText('Please login to make')).toBeVisible();
+});
+
