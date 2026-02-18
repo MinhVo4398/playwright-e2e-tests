@@ -89,3 +89,4 @@ use: {
      - Navigation actions in page objects
 
 ---
+![alt text](image.png)
