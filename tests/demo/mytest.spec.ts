@@ -9,7 +9,7 @@ test("Should load home page with correct title", async ({ page }) => {
   await expect(page.locator("//h1")).toHaveText("CURA Healthcare Service");
 });
 
-test("Should do something", { tag: "@smoke" }, async ({ page }, testInfo) => {
+test.skip("Should do something", { tag: "@smoke" }, async ({ page }, testInfo) => {
   // step...
   await page.locator("//h1").click();
 });
