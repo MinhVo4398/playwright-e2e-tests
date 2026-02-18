@@ -20,5 +20,52 @@ test.describe("Inventory Page Tests", () => {
     await expect(page).toHaveURL(/.*inventory/);
   });
 
-  test("Should confirm all prices with non-zero price", async ({ page }) => {});
+  test("Should confirm all prices with non-zero price", async ({ page }) => {
+    // Get a list of products
+    let productElms = page.locator(".inventory_item");
+    await expect(productElms).toHaveCount(6);
+
+    // Get product name and prices
+    let totalProducts = await productElms.count();
+    let priceArr = [];
+
+    for (let i = 0; i < totalProducts; i++) {
+      let eleNode = productElms.nth(i);
+
+      // Product name
+      let productName = await eleNode
+        .locator(".inventory_item_name")
+        .innerText();
+
+      //  price
+      let price = await eleNode.locator(".inventory_item_price").innerText();
+
+      // Print the results
+      console.log(`Product: ${productName}, price: ${price}`);
+
+      priceArr.push(price);
+    }
+    console.log(`Original Price Array: ${priceArr}`);
+
+    /**
+     * [$29.99,$9.99,$15.99,$49.99,$7.99,$15.99]
+     * 1. Replace all $ with ""
+     * 2. Compare the price which should be > 0
+     *
+     * [ 29.99, 9.99, 15.99, 49.99, 7.99, 15.99 ]
+     */
+
+    let priceArrNum = priceArr.map((item) => parseFloat(item.replace("$", "")));
+    console.log(">>> Modifed Array: ", priceArrNum); // [ 29.99, 9.99, 15.99, 49.99, 7.99, 15.99 ]
+
+    let priceArrWithInvalidVals = priceArrNum.filter((item) => item <= 0);
+
+    if (priceArrWithInvalidVals.length > 0) {
+      console.log(`ERROR: Zero price values found, ${priceArrWithInvalidVals}`);
+    } else {
+      console.log(`INFO: ALL prices are non-zero values`);
+    }
+
+    expect(priceArrWithInvalidVals).toHaveLength(0);
+  });
 });
