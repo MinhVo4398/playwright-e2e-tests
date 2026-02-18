@@ -26,3 +26,7 @@ test("Should demo locators", async ({ page }) => {
 test("Should demo config", async ({ page }, testInfo) => {
   console.log(`>>>> Config at run-time: ${JSON.stringify(testInfo.config)}`);
 });
+
+test("Should demo fixtures", async ({ page,browserName }, testInfo) => {
+   console.log(`>>>> The test runs on ${browserName}`); //The test runs on chromium
+});
