@@ -1,0 +1,93 @@
+{
+    "configFile": "/Users/minhvo/ProjectCoding/playwright-e2e-tests/playwright.config.ts",
+    "rootDir": "/Users/minhvo/ProjectCoding/playwright-e2e-tests/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+        "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+        {
+            "grep": {},
+            "grepInvert": null,
+            "outputDir": "/Users/minhvo/ProjectCoding/playwright-e2e-tests/test-results",
+            "repeatEach": 1,
+            "retries": 0,
+            "metadata": {},
+            "name": "chromium",
+            "testDir": "/Users/minhvo/ProjectCoding/playwright-e2e-tests/tests",
+            "snapshotDir": "/Users/minhvo/ProjectCoding/playwright-e2e-tests/tests",
+            "testIgnore": [],
+            "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+            "timeout": 30000,
+            "use": {
+                "trace": "off",
+                "ignoreHTTPSErrors": true,
+                "navigationTimeout": 30000,
+                "screenshot": "on",
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36",
+                "viewport": {
+                    "width": 1280,
+                    "height": 720
+                },
+                "screen": {
+                    "width": 1920,
+                    "height": 1080
+                },
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "defaultBrowserType": "chromium",
+                "video": "off",
+                "headless": false,
+                "_optionContextReuseMode": "when-possible",
+                "_optionConnectOptions": {
+                    "wsEndpoint": "ws://localhost:62326/429e5472397479c895eab920d01f9103"
+                }
+            },
+            "dependencies": [],
+            "__projectId": "chromium"
+        }
+    ],
+    "quiet": false,
+    "reporter": [
+        [
+            "html",
+            {
+                "open": "never"
+            }
+        ],
+        [
+            "/Users/minhvo/ProjectCoding/playwright-e2e-tests/node_modules/allure-playwright/dist/cjs/index.js",
+            {
+                "detail": true,
+                "suiteTitle": true,
+                "environmentInfo": {
+                    "name": "TEST",
+                    "appName": "CURA",
+                    "Release": "Release 1.1",
+                    "node_version": "v24.7.0"
+                }
+            }
+        ]
+    ],
+    "reportSlowTests": {
+        "max": 5,
+        "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "3way",
+    "version": "1.58.0",
+    "workers": 1,
+    "webServer": null
+}
