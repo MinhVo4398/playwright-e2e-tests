@@ -13,7 +13,9 @@ test.describe(
       "Login with valid credentials",
       async ({ page }, testInfo) => {
         // 1. Launch URL and assert title and header
-        await page.goto("https://katalon-demo-cura.herokuapp.com/");
+        await page.goto("https://katalon-demo-cura.herokuapp.com/", {
+          timeout: 60_000,
+        }); // will run over the config option
         await expect(page).toHaveTitle("CURA Healthcare Service");
         await expect(page.locator("//h1")).toContainText(
           "CURA Healthcare Service",
