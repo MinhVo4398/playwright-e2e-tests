@@ -60,7 +60,13 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        // ...devices["Desktop Chrome"],
+        viewport: null,
+        launchOptions: {
+          args: ["--start-maximized"],
+        },
+      },
     },
 
     // {
@@ -76,7 +82,7 @@ export default defineConfig({
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
+    //   use: { ...devices['headlessPixel 5'] },
     // },
     // {
     //   name: 'Mobile Safari',
