@@ -12,6 +12,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "demo:parellel": "npx playwright test --grep @demo",
     "demo:tag": "npx playwright test --grep @smoke --headed",
     "demo:hooks": "npx playwright test tests/demo/hooks-demo.spec.ts --headed",
     "make-apt": "npx playwright test tests/functional/make.aptmnt.spec.ts --headed",

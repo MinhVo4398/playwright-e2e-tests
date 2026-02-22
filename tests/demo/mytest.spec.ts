@@ -1,4 +1,4 @@
-import { test, expect , devices} from "@playwright/test";
+import { test, expect, devices } from "@playwright/test";
 
 test("Should load home page with correct title", async ({ page }) => {
   //1. Go to the home page
@@ -37,4 +37,12 @@ test("Should demo fixtures", async ({ page, browserName }, testInfo) => {
 
 test("Should demo devices", async ({ page }, testInfo) => {
   console.log(`>> The list of devices: ${Object.keys(devices)}`);
+});
+
+test("Should demo parallel run 1", { tag: "@demo" }, async ({ page }) => {
+  await page.goto("https://google.com");
+});
+
+test("Should demo parallel run 2", { tag: "@demo" }, async ({ page }) => {
+  await page.goto("https://google.com");
 });

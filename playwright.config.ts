@@ -72,9 +72,16 @@ export default defineConfig({
     },
 
     // {
-    //   name: "firefox",
-    //   use: { ...devices["Desktop Firefox"] },
-    // },
+    //   name: 'Galaxy A55',
+    //   use: {
+    //     ...devices['Galaxy A55']
+    //   }
+    // }
+
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
 
     // {
     //   name: "webkit",
