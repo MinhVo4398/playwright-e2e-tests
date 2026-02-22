@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect , devices} from "@playwright/test";
 
 test("Should load home page with correct title", async ({ page }) => {
   //1. Go to the home page
@@ -9,10 +9,14 @@ test("Should load home page with correct title", async ({ page }) => {
   await expect(page.locator("//h1")).toHaveText("CURA Healthcare Service");
 });
 
-test.skip("Should do something", { tag: "@smoke" }, async ({ page }, testInfo) => {
-  // step...
-  await page.locator("//h1").click();
-});
+test.skip(
+  "Should do something",
+  { tag: "@smoke" },
+  async ({ page }, testInfo) => {
+    // step...
+    await page.locator("//h1").click();
+  },
+);
 
 test("Should demo locators", async ({ page }) => {
   await page.goto("https://katalon-demo-cura.herokuapp.com/");
@@ -27,6 +31,10 @@ test("Should demo config", async ({ page }, testInfo) => {
   console.log(`>>>> Config at run-time: ${JSON.stringify(testInfo.config)}`);
 });
 
-test("Should demo fixtures", async ({ page,browserName }, testInfo) => {
-   console.log(`>>>> The test runs on ${browserName}`); //The test runs on chromium
+test("Should demo fixtures", async ({ page, browserName }, testInfo) => {
+  console.log(`>>>> The test runs on ${browserName}`); //The test runs on chromium
+});
+
+test("Should demo devices", async ({ page }, testInfo) => {
+  console.log(`>> The list of devices: ${Object.keys(devices)}`);
 });
