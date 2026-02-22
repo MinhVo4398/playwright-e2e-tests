@@ -4,14 +4,16 @@ import { defineConfig, devices } from "@playwright/test";
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+import dotenv from "dotenv";
+import path from "path";
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  globalSetup: require.resolve("./tests/helpers/global-setup.ts"),
+  globalTeardown: require.resolve("./tests/helpers/global-teardown.ts"),
   testDir: "./tests",
   globalTimeout: 3 * 60 * 60 * 1000, // 3 hours
   /* Run tests in files in parallel */
