@@ -1,28 +1,38 @@
 import { test, expect } from "@playwright/test";
+import { log } from "../helpers/logger";
 
 test.describe("Make appointment ", () => {
-  test.beforeEach("Login with valid credentials", async ({ page }, testInfo) => {
-    // 1. Launch URL and assert title and header
-    // Get the URL from the config file
-    const envConfig =  testInfo.project.use as any;
-    await page.goto(envConfig.appURL);
-    // await page.goto("https://katalon-demo-cura.herokuapp.com/");
-    await page.goto("https://katalon-demo-cura.herokuapp.com/");
-    await expect(page).toHaveTitle("CURA Healthcare Service");
-    await expect(page.locator("//h1")).toContainText("CURA Healthcare Service");
+  test.beforeEach(
+    "Login with valid credentials",
+    async ({ page }, testInfo) => {
+      // 1. Launch URL and assert title and header
+      // Get the URL from the config file
+      const envConfig = testInfo.project.use as any;
 
-    // 2. Click on the Make Appointment
-    await page.getByRole("link", { name: "Make Appointment" }).click();
-    await expect(page.getByText("Please login to make")).toBeVisible();
+      // Custom logs
+      await log("info", `Launching the web app in  ${envConfig.envName}`);
+      await page.goto(envConfig.appURL);
 
-    // 3. Successful Login
-    await page.getByLabel("Username").fill("John Doe");
-    await page.getByLabel("Password").fill("ThisIsNotAPassword");
-    await page.getByRole("button", { name: "Login" }).click();
+      await expect(page).toHaveTitle("CURA Healthcare Service");
+      await expect(page.locator("//h1")).toContainText(
+        "CURA Healthcare Service",
+      );
 
-    // 4. Verify successful login
-    await expect(page.locator("h2")).toContainText("Make Appointment");
-  });
+      // 2. Click on the Make Appointment
+      await page.getByRole("link", { name: "Make Appointment" }).click();
+      await expect(page.getByText("Please login to make")).toBeVisible();
+
+      // 3. Successful Login
+      await page.getByLabel("Username").fill("John Doe");
+      await page.getByLabel("Password").fill("ThisIsNotAPassword");
+      await page.getByRole("button", { name: "Login" }).click();
+
+      // 4. Verify successful login
+      await expect(page.locator("h2")).toContainText("Make Appointment");
+      await log("info", `The login is successful`);
+      await log("error", `The next page did not load`);
+    },
+  );
 
   test("Should make an appointment with non-default ", async ({ page }) => {
     // Dropdown
