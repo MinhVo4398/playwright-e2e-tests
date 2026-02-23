@@ -90,3 +90,7 @@ use: {
 
 ---
 ![alt text](image.png)
+
+
+# Check list config 
+npx playwright test --config=config/test.playwright.config.ts --list

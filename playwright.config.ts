@@ -11,7 +11,7 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+export const baseConfig =  defineConfig({
   globalSetup: require.resolve("./tests/helpers/global-setup.ts"),
   globalTeardown: require.resolve("./tests/helpers/global-teardown.ts"),
   testDir: "./tests",
