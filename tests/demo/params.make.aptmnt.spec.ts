@@ -25,6 +25,10 @@ for (const apptData of makeApptTestData) {
       await page.getByLabel("Password").fill("ThisIsNotAPassword");
       await page.getByRole("button", { name: "Login" }).click();
 
+      // Get login cookies
+      const loginCookies = await page.context().cookies();
+      process.env.LOGIN_COOKIES = JSON.stringify(loginCookies);
+
       // 4. Verify successful login
       await expect(page.locator("h2")).toContainText("Make Appointment");
     });
@@ -32,6 +36,9 @@ for (const apptData of makeApptTestData) {
     test(`${apptData.testId} -Should make an appointment with non-default `, async ({
       page,
     }) => {
+       // Access the login cookies
+       console.log(`>>> LOGIN_COOKIES: ${process.env.LOGIN_COOKIES}`);
+
       // Dropdown
       await page.getByLabel("Facility").selectOption(`${apptData.facility}`);
       // Checkbox

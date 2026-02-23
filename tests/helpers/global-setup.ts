@@ -24,4 +24,10 @@ export default async function globalSetup(config: FullConfig) {
   // - Start test servers
 
   console.log(`[INFO]: Completed the global setup...`);
+
+  // Set the login coookie gloabal vairable
+  process.env.LOGIN_COOKIES = undefined;
+  
+
+
 }
