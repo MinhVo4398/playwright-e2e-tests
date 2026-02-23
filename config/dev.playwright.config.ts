@@ -3,14 +3,14 @@ import { baseConfig } from "../playwright.config.ts";
 import { EnvConfig } from "../tests/helpers/config-fixtures.ts";
 import path from "path";
 
-console.log(`-----LOADING TEST ENV------ `);
+console.log(`-----LOADING  DEV ENV------ `);
 export default defineConfig<EnvConfig>({
   ...baseConfig, // Loads all existing config values...
   testDir: path.resolve(process.cwd(), "./tests"),
   use: {
     ...baseConfig.use, // Loading the existing use object
-    envName: "test",
-    appURL: "https://katalon-demo-cura.herokuapp.com/",
+    envName: "dev",
+    appURL: "https://dev.katalon-demo-cura.herokuapp.com/", //invalid url just demo
     dbConfig: {
       server: "",
       dbName: "",

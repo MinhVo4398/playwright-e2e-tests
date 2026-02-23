@@ -13,6 +13,7 @@
   "main": "index.js",
   "scripts": {
     "test:make-apt": "npx playwright test tests/functional/make.aptmnt.spec.ts --config=config/test.playwright.config.ts --headed",
+    "dev:make-apt": "npx playwright test tests/functional/make.aptmnt.spec.ts --config=config/dev.playwright.config.ts --headed",
     "demo:params": "npx playwright test tests/demo/params.make.aptmnt.spec.ts --headed",
     "demo:parellel": "npx playwright test --grep @demo",
     "demo:tag": "npx playwright test --grep @smoke --headed",
