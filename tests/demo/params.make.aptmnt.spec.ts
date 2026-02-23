@@ -21,8 +21,8 @@ for (const apptData of makeApptTestData) {
       await expect(page.getByText("Please login to make")).toBeVisible();
 
       // 3. Successful Login
-      await page.getByLabel("Username").fill("John Doe");
-      await page.getByLabel("Password").fill("ThisIsNotAPassword");
+      await page.getByLabel("Username").fill(process.env.TEST_USER_NAME);
+      await page.getByLabel("Password").fill(process.env.TEST_USER_PASSWORD);
       await page.getByRole("button", { name: "Login" }).click();
 
       // Get login cookies
