@@ -1,4 +1,5 @@
 import { test, expect, devices } from "@playwright/test";
+import constants from "../../data/constants.json";
 
 test("Should load home page with correct title", async ({ page }) => {
   //1. Go to the home page
@@ -46,3 +47,8 @@ test("Should demo parallel run 1", { tag: "@demo" }, async ({ page }) => {
 test("Should demo parallel run 2", { tag: "@demo" }, async ({ page }) => {
   await page.goto("https://google.com");
 });
+
+test("Should demo constants data ", async ({ page }) => {
+  console.log(`>>> Constants data: ${JSON.stringify(constants.STATUSCODE)}`); //>>> Constants data: {"success":200,"validationError":707}});
+});
+
