@@ -1,18 +1,69 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../page-objects/nopcommerce.home.page";
 import { log } from "../helpers/logger";
+import CustList from "../page-objects/nopcommerce.custlist.page";
+import constants from "../../data/constants.json";
 
-test("Login to NopCommerce App", async ({ page }, testInfo) => {
-  //  Env Config
-  const envConfig = testInfo.project.use as any;
+test.describe("E2E Customer Search", () => {
+  test("E2E_TC001: Search the external customers in customer portal", async ({
+    page,
+    request,
+  }, testInfo) => {
+    //  Env Config
+    const envConfig = testInfo.project.use as any;
 
-  // Create an page object
-  const homePage = new HomePage(page);
+    /** 1. Get list of users */
+    // Make a GET call
+    await log("info", `Making a GET call using ${envConfig.apiURL}`);
+    const res = await request.get(
+      `${envConfig.apiURL}${constants.REQ_RES_ENDPOINTS.GET_USERS_LIST}`,
+      {
+        headers: {
+          "x-api-key": process.env.REQRES_API_KEY,
+          "Content-Type": "application/json",
+        },
+      },
+    );
 
-  // Login nopCommerceWeb
-  await homePage.loginToNopCommerceApp(
-    envConfig.nopCommerceWeb,
-    process.env.NOP_COMMERCE_TEST_USERNAME,
-    process.env.NOP_COMMERCE_TEST_PASSWORD,
-  );
+    // Assert the status code
+    expect(res.status()).toBe(200);
+    await log("info", `The GET call is successfull with ${res.status()}`);
+
+    const userData = await res.json();
+    log("info", `List of users: ${JSON.stringify(userData)}`);
+
+    // 2.Login nopCommerceWeb
+    const homePage = new HomePage(page);
+    await homePage.loginToNopCommerceApp(
+      envConfig.nopCommerceWeb,
+      process.env.NOP_COMMERCE_TEST_USERNAME,
+      process.env.NOP_COMMERCE_TEST_PASSWORD,
+    );
+
+    // 3. Customer search
+    const USER_DATA = userData.data;
+    const customerListPage = new CustList(page);
+    await customerListPage.goToCustomerListPage(
+      `${envConfig.nopCommerceWeb}Admin/Customer/List`,
+    );
+
+    // Iterate over the list of users
+    for (const user of USER_DATA) {
+      let customerNotFound = await customerListPage.searchAndConfirmUser(
+        user.first_name,
+        user.last_name,
+      );
+      if (customerNotFound) {
+        await log(
+          "warn",
+          `Customer ${user.first_name} ${user.last_name} is not found`,
+        );
+      } else {
+        await log(
+          "info",
+          `Customer ${user.first_name} ${user.last_name} is found`,
+        );
+      }
+    }
+  });
 });
