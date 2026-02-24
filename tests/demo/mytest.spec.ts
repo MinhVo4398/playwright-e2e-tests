@@ -1,5 +1,6 @@
 import { test, expect, devices } from "@playwright/test";
 import constants from "../../data/constants.json";
+import { log } from "../helpers/logger";
 
 test("Should load home page with correct title", async ({ page }) => {
   //1. Go to the home page
@@ -52,3 +53,22 @@ test("Should demo constants data ", async ({ page }) => {
   console.log(`>>> Constants data: ${JSON.stringify(constants.STATUSCODE)}`); //>>> Constants data: {"success":200,"validationError":707}});
 });
 
+test("Should demo click action ", async ({ page }) => {
+  // Default Action
+  // await page.goto("https://katalon-demo-cura.herokuapp.com/");
+  let ele = page.getByRole("link", { name: "Make - Appointment" }); // Wrong locator
+  // await ele.click();
+
+  // Base page action
+  await page.goto("https://katalon-demo-cura.herokuapp.com/");
+  try {
+    await expect(ele).toBeVisible({ timeout: 10_000 }); // Custom timeout: defalt - 5seconds
+    await ele.click();
+  } catch (error) {
+    await log(
+      "error",
+      `Failed to click element: ${ele.toString()}, original error: ${error}`,
+    );
+    throw error;
+  }
+});
