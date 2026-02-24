@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import pwHelper from "../helpers/pw-helper";
 
 test.describe(
   "Make appointment ",
@@ -44,13 +45,8 @@ test.describe(
 
         /**
          * Add custom screenshot at test scope level
-         * @TODO : add this as a helper function
          */
-        let fullPageScreenshot = await page.screenshot({ fullPage: true });
-        testInfo.attach("login page", {
-          body: fullPageScreenshot,
-          contentType: "image/png",
-        });
+        await pwHelper.takeFullPageScreenshot(page, "login page");
 
         // 4. Verify successful login
         await expect(page.locator("h2")).toContainText("Make Appointment");

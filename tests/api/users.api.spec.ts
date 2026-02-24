@@ -3,9 +3,10 @@ import { log } from "../helpers/logger.js";
 
 import constants from "../../data/constants.json";
 import TestData from "../../data/test-data";
+import fileHelper from "../helpers/file-helper";
 
 test.describe("REST API Demo", () => {
-  let envConfig: any;
+  let envConfig = undefined;
 
   test.beforeEach("Get the env config", async ({ request }, testInfo) => {
     envConfig = testInfo.project.use as any;
@@ -33,6 +34,12 @@ test.describe("REST API Demo", () => {
     // Get list of users
     const userData = await res.json();
     await log("info", `List of users:  ${JSON.stringify(userData, null, 2)}`);
+
+    // Write the list of users
+    fileHelper.writeFile(
+      `${process.cwd()}/data/api-response/list-of-users.json`,
+      JSON.stringify(userData),
+    );
   });
 
   test("Should create a user (POST)", async ({ request }) => {
