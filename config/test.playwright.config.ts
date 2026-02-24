@@ -17,5 +17,6 @@ export default defineConfig<EnvConfig>({
       dbName: "",
       connectionStr: "",
     },
+    apiURL: "https://reqres.in/api",
   },
 });

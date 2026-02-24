@@ -39,4 +39,16 @@ export default class TestData {
       },
     ];
   }
+
+  static apiUserCreation () {
+    return [
+      {
+        name: "test-user",
+        job: "leader",
+        id: "123",
+        createdAt: "2025-08-16T10:13:43.039Z",
+      },
+    ];
+  }
 }
+
