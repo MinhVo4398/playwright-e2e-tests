@@ -94,3 +94,6 @@ use: {
 
 # Check list config 
 npx playwright test --config=config/test.playwright.config.ts --list
+
+# Repo refer
+https://github.com/copeautomation/playwright-e2e-tests
